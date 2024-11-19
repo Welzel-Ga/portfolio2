@@ -1,0 +1,100 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerta Personalizado</title>
+    <style>
+        /* Estilo para a caixa de alerta */
+        #custom-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fefefe;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            z-index: 1000;
+            display: none; /* Esconde a caixa inicialmente */
+        }
+
+        /* Estilo para o botão fechar */
+        #custom-alert button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #custom-alert button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Fundo escuro para destacar o alerta */
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none; /* Esconde o fundo inicialmente */
+        }
+    </style>
+</head>
+<body>
+    <div id="overlay"></div>
+    <div id="custom-alert">
+        <p id="alert-message">Mensagem de saudação aqui!</p>
+        <button onclick="closeAlert()">Fechar</button>
+    </div>
+
+    <script>
+        function showAlert(message) {
+            // Atualiza a mensagem do alerta
+            document.getElementById('alert-message').innerText = message;
+
+            // Mostra o alerta e o fundo escuro
+            document.getElementById('custom-alert').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function closeAlert() {
+            // Esconde o alerta e o fundo escuro
+            document.getElementById('custom-alert').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        // Exibe a saudação personalizada com base no horário
+        function getGreeting() {
+            const now = new Date();
+            const hours = now.getHours();
+            let greeting;
+
+            if (hours >= 5 && hours < 12) {
+                greeting = "Bom dia! Bem vindo(a) ao meu Portfólio";
+            } else if (hours >= 12 && hours < 18) {
+                greeting = "Boa tarde! Bem vindo(a) ao meu Portfólio";
+            } else {
+                greeting = "Boa noite! Bem vindo(a) ao meu Portfólio";
+            }
+
+            showAlert(greeting); // Chama a função para exibir o alerta
+        }
+
+        // Executa quando a página é carregada
+        window.onload = getGreeting;
+    </script>
+</body>
+</html>
